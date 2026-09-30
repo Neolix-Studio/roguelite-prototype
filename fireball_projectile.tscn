@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b8aeq2kgosml6"]
+
+[ext_resource type="Script" uid="uid://ii7prqp2h1w7" path="res://fireball_projectile.gd" id="1_sob7p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nteaq"]
+albedo_color = Color(1, 0.42745098, 0.32156864, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hih8s"]
+material = SubResource("StandardMaterial3D_nteaq")
+radius = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0qxw6"]
+radius = 2.5
+
+[node name="FireballProjectile" type="Area3D" unique_id=1717448401]
+script = ExtResource("1_sob7p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1023047556]
+mesh = SubResource("SphereMesh_hih8s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1498081758]
+shape = SubResource("SphereShape3D_0qxw6")

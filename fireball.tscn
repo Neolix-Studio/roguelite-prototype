@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ct7midbutm254"]
+
+[ext_resource type="Script" uid="uid://fx8vfef8qwea" path="res://fireball.gd" id="1_sf4mh"]
+[ext_resource type="PackedScene" uid="uid://b8aeq2kgosml6" path="res://fireball_projectile.tscn" id="2_olwj8"]
+
+[node name="Fireball" type="Node3D" unique_id=1466803428]
+script = ExtResource("1_sf4mh")
+projectile_scene = ExtResource("2_olwj8")
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=1635540015]
+wait_time = 2.5
+autostart = true
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

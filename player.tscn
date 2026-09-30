@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c4lc7rb1cecjw"]
+
+[ext_resource type="Script" uid="uid://dg5u6a6sfm7cl" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://cidf8psm6hnl4" path="res://cleave.tscn" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://ct7midbutm254" path="res://fireball.tscn" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://dtck083fg3vt4" path="res://curse.tscn" id="4_hqtel"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hih8s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hih8s"]
+
+[node name="Player" type="CharacterBody3D" unique_id=2055573932]
+script = ExtResource("1_4flbx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=435401215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1071557, 0)
+shape = SubResource("CapsuleShape3D_hih8s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1628336454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1071557, 0)
+mesh = SubResource("CapsuleMesh_hih8s")
+
+[node name="Cleave" parent="." unique_id=455514715 instance=ExtResource("2_onrkg")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Fireball" parent="." unique_id=1466803428 instance=ExtResource("3_i3pqv")]
+process_mode = 4
+
+[node name="Curse" parent="." unique_id=1025697143 instance=ExtResource("4_hqtel")]
+process_mode = 4

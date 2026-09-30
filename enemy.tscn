@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b6k08ld7rp28q"]
+
+[ext_resource type="Script" uid="uid://qe1j4t6s1dbm" path="res://enemy.gd" id="1_7k104"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hih8s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qxw6"]
+albedo_color = Color(1, 0, 0.12156863, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nteaq"]
+
+[node name="Enemy" type="CharacterBody3D" unique_id=1398271417 groups=["enemies"]]
+script = ExtResource("1_7k104")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1760663170]
+mesh = SubResource("CylinderMesh_hih8s")
+surface_material_override/0 = SubResource("StandardMaterial3D_0qxw6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=239897737]
+shape = SubResource("CylinderShape3D_nteaq")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=766564472]
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

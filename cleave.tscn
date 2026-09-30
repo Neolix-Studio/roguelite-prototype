@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cidf8psm6hnl4"]
+
+[ext_resource type="Script" uid="uid://cn8clywqu2a2k" path="res://cleave.gd" id="1_y0ufr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hih8s"]
+radius = 4.5
+
+[node name="Cleave" type="Area3D" unique_id=455514715]
+script = ExtResource("1_y0ufr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=959570764]
+shape = SubResource("SphereShape3D_hih8s")
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=524477342]
+autostart = true
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

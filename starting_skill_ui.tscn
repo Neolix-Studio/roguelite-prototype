@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dxlcij5cgj5k1"]
+
+[ext_resource type="Script" uid="uid://5pl2kwgy1mmo" path="res://starting_skill_ui.gd" id="1_1h8um"]
+
+[node name="StartingSkillUI" type="CanvasLayer" unique_id=959049834]
+process_mode = 2
+script = ExtResource("1_1h8um")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=242077818]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=2121937798]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=134047833]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1949238527]
+layout_mode = 2
+text = "Choose Your Starting Skill"
+
+[node name="CleaveButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=872468517]
+layout_mode = 2
+text = "Cleave"
+
+[node name="FireballButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1389461468]
+layout_mode = 2
+text = "Fireball"
+
+[node name="CurseButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=521190723]
+layout_mode = 2
+text = "Curse"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/CleaveButton" to="." method="_on_cleave_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/FireballButton" to="." method="_on_fireball_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/CurseButton" to="." method="_on_curse_button_pressed"]

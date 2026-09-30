@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://0u684boyvqon"]
+
+[ext_resource type="PackedScene" uid="uid://c4lc7rb1cecjw" path="res://player.tscn" id="1_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://b6k08ld7rp28q" path="res://enemy.tscn" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://dnskjcdurpkqb" path="res://upgrade_ui.tscn" id="4_aqk2v"]
+[ext_resource type="Script" uid="uid://tnpxlq3p6f6d" path="res://enemy_spawner.gd" id="4_wse8f"]
+[ext_resource type="PackedScene" uid="uid://bx7bdnm76bt8e" path="res://hud.tscn" id="5_036b0"]
+[ext_resource type="PackedScene" uid="uid://bl777od0hjywh" path="res://game_over_ui.tscn" id="7_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://dxlcij5cgj5k1" path="res://starting_skill_ui.tscn" id="7_pkg7o"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hih8s"]
+size = Vector3(30, 0.2, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nteaq"]
+size = Vector3(30, 0.2, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hih8s"]
+size = Vector3(30, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0qxw6"]
+size = Vector3(30, 2, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pkldd"]
+size = Vector3(0.5, 2, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_po4sb"]
+size = Vector3(0.5, 2, 30)
+
+[node name="World" type="Node3D" unique_id=117052766]
+
+[node name="Arena" type="StaticBody3D" parent="." unique_id=518494375]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena" unique_id=925232]
+mesh = SubResource("BoxMesh_hih8s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena" unique_id=1673697241]
+shape = SubResource("BoxShape3D_nteaq")
+
+[node name="Player" parent="." unique_id=2055573932 instance=ExtResource("1_fj7yv")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=850152778]
+transform = Transform3D(0.70710677, -0.40860704, 0.5770964, 0, 0.8161376, 0.5778576, -0.70710677, -0.40860704, 0.5770964, 10, 10, 10)
+projection = 1
+current = true
+size = 20.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=729190127]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=539188452]
+
+[node name="NorthCollision" type="CollisionShape3D" parent="StaticBody3D" unique_id=1279189660]
+transform = Transform3D(1, 0, 0, 0, -0.02189144, -0.9997603, 0, 0.9997603, -0.02189144, 0, 0.0073007094, -14.827495)
+shape = SubResource("BoxShape3D_hih8s")
+
+[node name="SouthCollision" type="CollisionShape3D" parent="StaticBody3D" unique_id=1857785519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.014202)
+shape = SubResource("BoxShape3D_0qxw6")
+
+[node name="EastCollision" type="CollisionShape3D" parent="StaticBody3D" unique_id=1233366902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.423327, 0, 0)
+shape = SubResource("BoxShape3D_pkldd")
+
+[node name="WestCollision" type="CollisionShape3D" parent="StaticBody3D" unique_id=159838615]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.358495, 0, 0)
+shape = SubResource("BoxShape3D_po4sb")
+
+[node name="EnemySpawner" type="Node3D" parent="." unique_id=287464750 node_paths=PackedStringArray("target")]
+script = ExtResource("4_wse8f")
+enemy_scene = ExtResource("2_tlwt5")
+target = NodePath("../Player")
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawner" unique_id=2061815393]
+wait_time = 1.5
+autostart = true
+
+[node name="SpawnPoints" type="Node3D" parent="EnemySpawner" unique_id=1823434840]
+
+[node name="SpawnEast" type="Marker3D" parent="EnemySpawner/SpawnPoints" unique_id=17003389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.2, 0)
+
+[node name="SpawnWest" type="Marker3D" parent="EnemySpawner/SpawnPoints" unique_id=1103275356]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.874046, 1.2, 0)
+
+[node name="SpawnNorth" type="Marker3D" parent="EnemySpawner/SpawnPoints" unique_id=1415892164]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7621994, 1.2, -10.87998)
+
+[node name="SpawnSouth" type="Marker3D" parent="EnemySpawner/SpawnPoints" unique_id=774040366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78217506, 1.2, 9.848721)
+
+[node name="WaveCheckTimer" type="Timer" parent="EnemySpawner" unique_id=1347112417]
+wait_time = 0.5
+autostart = true
+
+[node name="UpgradeUI" parent="." unique_id=1504442085 node_paths=PackedStringArray("player") instance=ExtResource("4_aqk2v")]
+player = NodePath("../Player")
+
+[node name="HUD" parent="." unique_id=46135490 instance=ExtResource("5_036b0")]
+
+[node name="GameOverUI" parent="." unique_id=122028921 instance=ExtResource("7_gbfbk")]
+
+[node name="StartingSkillUI" parent="." unique_id=959049834 node_paths=PackedStringArray("player") instance=ExtResource("7_pkg7o")]
+player = NodePath("../Player")
+
+[connection signal="died" from="Player" to="GameOverUI" method="_on_player_died"]
+[connection signal="experience_changed" from="Player" to="HUD" method="_on_player_experience_changed"]
+[connection signal="health_changed" from="Player" to="HUD" method="_on_player_health_changed"]
+[connection signal="passive_choice_requested" from="Player" to="UpgradeUI" method="_on_player_passive_choice_requested"]
+[connection signal="skill_choice_requested" from="Player" to="StartingSkillUI" method="_on_player_skill_choice_requested"]
+[connection signal="wave_changed" from="EnemySpawner" to="HUD" method="_on_enemy_spawner_wave_changed"]
+[connection signal="timeout" from="EnemySpawner/SpawnTimer" to="EnemySpawner" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="EnemySpawner/WaveCheckTimer" to="EnemySpawner" method="_on_wave_check_timer_timeout"]

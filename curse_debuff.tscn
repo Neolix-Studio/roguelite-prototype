@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cfyg2p66ti32v"]
+
+[ext_resource type="Script" uid="uid://ch2boy1ogyc55" path="res://curse_debuff.gd" id="1_a20yp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1h53s"]
+albedo_color = Color(0.48820168, 0.00017052724, 0.489123, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_xgt2o"]
+material = SubResource("StandardMaterial3D_1h53s")
+
+[node name="CurseDebuff" type="Node3D" unique_id=983590359]
+script = ExtResource("1_a20yp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1089794420]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("TorusMesh_xgt2o")
+
+[node name="TickTimer" type="Timer" parent="." unique_id=1203585204]
+wait_time = 0.3
+autostart = true
+
+[node name="DurationTimer" type="Timer" parent="." unique_id=2087291931]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]
+[connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]

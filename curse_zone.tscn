@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://xxg1yy0f3b2t"]
+
+[ext_resource type="Script" uid="uid://didds4i2relud" path="res://curse_zone.gd" id="1_xgt2o"]
+[ext_resource type="PackedScene" uid="uid://cfyg2p66ti32v" path="res://curse_debuff.tscn" id="2_1h53s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1h53s"]
+albedo_color = Color(0.6102623, 0.0002735752, 0.6102579, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xgt2o"]
+material = SubResource("StandardMaterial3D_1h53s")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 0.05
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hjlsc"]
+radius = 3.0
+
+[node name="CurseZone" type="Area3D" unique_id=315526906]
+script = ExtResource("1_xgt2o")
+curse_debuff = ExtResource("2_1h53s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1794659607]
+mesh = SubResource("CylinderMesh_xgt2o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=843163035]
+shape = SubResource("CylinderShape3D_hjlsc")
+
+[node name="ApplyTimer" type="Timer" parent="." unique_id=1469485492]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="ApplyTimer" to="." method="_on_apply_timer_timeout"]

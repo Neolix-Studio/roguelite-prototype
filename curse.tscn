@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dtck083fg3vt4"]
+
+[ext_resource type="Script" uid="uid://d32ju7un6j83c" path="res://curse.gd" id="1_jspm0"]
+[ext_resource type="PackedScene" uid="uid://xxg1yy0f3b2t" path="res://curse_zone.tscn" id="2_dswov"]
+
+[node name="Curse" type="Node3D" unique_id=1025697143]
+script = ExtResource("1_jspm0")
+curse_zone = ExtResource("2_dswov")
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=1568453128]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
